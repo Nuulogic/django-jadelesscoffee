@@ -1,6 +1,6 @@
 from settings import *
 
-class JadeLessCoffeeMiddleware:
+class JadeLessCoffeeMiddleware(object):
     def __init__(JadeLessCoffeeMiddleware):
         if DEBUG is not None and DEBUG is False:
             raise django.core.exceptions.MiddlewareNotUsed
