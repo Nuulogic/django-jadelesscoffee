@@ -24,6 +24,9 @@ class JadeLessCoffeeMiddleware(object):
                     self.compile(template_directory + '/src', template_directory)
             else:
                 self.compile(STATICFILES_DIRS + '/src', STATICFILES_DIRS)
+
+            #STATIC_ROOT shouldn't be left out.
+            self.compile(STATIC_ROOT + '/src', STATIC_ROOT)
             
 
     def compile(self, source_directory, output_directory):
