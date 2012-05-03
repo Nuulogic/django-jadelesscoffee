@@ -11,7 +11,7 @@ django-jadelesscoffee is *not* meant for a production environment. **It is slow.
 Requirements
 ------------
 
-**JadeLessCoffee** Node.js module.
+**JadeLessCoffee** Node.js module. (Note that this is currently in a closed alpha state until it can be a proven technique.)
 
 
 Installation
