@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='django-jadelesscoffee',
-    version='0.1.0',
+    version='0.1.1',
     description='Django middleware class that executes the Node.js JadeLessCoffee compiler on a `src` folder in the TEMPLATE_DIRS directory.',
     author='Oliver Wilkerson, Matthew Wells, Jeff Andrews, Nuu Logic LLC',
     author_email='oliver.wilkerson@nuulogic.com',
