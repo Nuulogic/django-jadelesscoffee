@@ -17,7 +17,7 @@ Requirements
 Installation
 ------------
 
-`$ pip install git+https://github.com/Nuulogic/django-jadelesscoffee.git`
+`$ pip install git+git://github.com/Nuulogic/django-jadelesscoffee.git`
 
 Then in your Django application, include this middleware:
 `MIDDLEWARE_CLASSES = (
