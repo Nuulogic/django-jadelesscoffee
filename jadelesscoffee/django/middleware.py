@@ -31,6 +31,9 @@ class JadeLessCoffeeMiddleware(object):
             
 
     def compile(self, source_directory, output_directory):
-        from subprocess import call
+        if not path.exists(source_directory) or not path.exists(output_directory):
+            return
+
+        from subprocess import Popen, call, PIPE
         #shell=True is necessary on windows due to jlc being provided by environment variables in node
-        call(['jlc', '--quiet', '--incremental', '--out', output_directory, source_directory], shell=True)
+        Popen(['jlc', '--quiet', '--incremental', '--out', output_directory, source_directory], shell=True, stdout=PIPE, stderr=PIPE)
