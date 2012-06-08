@@ -31,9 +31,15 @@ class JadeLessCoffeeMiddleware(object):
             
 
     def compile(self, source_directory, output_directory):
-        if not path.exists(source_directory) or not path.exists(output_directory):
+        if not path.exists(source_directory):
+            #print('No such file or directory: "%s"' % source_directory)
+            return
+        if not path.exists(output_directory):
+            #print('No such file or directory: "%s"' % output_directory)
             return
 
-        from subprocess import Popen, call, PIPE
+        # subprocess suddenly stopped working...
+        #from subprocess import Popen, call, PIPE
         #shell=True is necessary on windows due to jlc being provided by environment variables in node
-        Popen(['jlc', '--quiet', '--incremental', '--out', output_directory, source_directory], shell=True, stdout=PIPE, stderr=PIPE)
+        #call(['jlc', '--incremental', '--out', output_directory, source_directory], shell=True)#, stdout=PIPE, stderr=PIPE)
+        os.system('jlc --quiet --incremental --out "%s" "%s"' % (output_directory, source_directory))
