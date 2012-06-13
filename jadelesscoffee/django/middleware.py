@@ -1,5 +1,5 @@
 from django.conf import settings
-from os.path import normpath
+from os import path
 import sys
 import os
 
@@ -15,19 +15,19 @@ class JadeLessCoffeeMiddleware(object):
         #for each template directory look for a src dir
         if (isinstance(settings.TEMPLATE_DIRS, tuple)):
             for template_directory in settings.TEMPLATE_DIRS:
-                self.compile(normpath(template_directory + '/src'), template_directory)
+                self.compile(path.normpath(template_directory + '/src'), template_directory)
         else:
-            self.compile(normpath(settings.TEMPLATE_DIRS + '/src'), settings.TEMPLATE_DIRS)
+            self.compile(path.normpath(settings.TEMPLATE_DIRS + '/src'), settings.TEMPLATE_DIRS)
 
         #same with settings.STATICFILES_DIRS
         if (isinstance(settings.STATICFILES_DIRS, tuple)):
             for template_directory in settings.STATICFILES_DIRS:
-                self.compile(normpath(template_directory + '/src'), template_directory)
+                self.compile(path.normpath(template_directory + '/src'), template_directory)
         else:
-            self.compile(normpath(settings.STATICFILES_DIRS + '/src'), settings.STATICFILES_DIRS)
+            self.compile(path.normpath(settings.STATICFILES_DIRS + '/src'), settings.STATICFILES_DIRS)
 
         #settings.STATIC_ROOT shouldn't be left out.
-        self.compile(normpath(settings.STATIC_ROOT + '/src'), settings.STATIC_ROOT)
+        self.compile(path.normpath(settings.STATIC_ROOT + '/src'), settings.STATIC_ROOT)
             
 
     def compile(self, source_directory, output_directory):
