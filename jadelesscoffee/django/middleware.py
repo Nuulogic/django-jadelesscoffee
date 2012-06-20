@@ -12,6 +12,23 @@ class JadeLessCoffeeMiddleware(object):
             print('JadeLessCoffee compiler will run at every request...\n');
 
     def process_request(self, request):
+        #if the JLC_DIRS is set then just do them
+        if settings.JLC_DIRS is not None:
+            if isinstance(settings.JLC_DIRS, tuple):
+                try:
+                    for jlcsource, jlcdestination in settings.JLC_DIRS:
+                        self.compile(path.normpath(jlcsource), path.normpath(jlcdestination))
+                except:
+                    print("Cannot compile jlc directories. JLC_DIRS should be a tuple of tuples. \ne.g. JLC_DIRS = (\n    ('/path/to/src', '/path/to/'),\n    ('/path/to/other/src', '/path/to/other'),\n)")
+            else:
+                try:
+                    jlcsource, jlcdestination = settings.JLC_DIRS
+                    self.compile(path.normpath(jlcsource), path.normpath(jlcdestination))
+                except:
+                    print("Cannot compile jlc directories. JLC_DIRS should be a tuple of tuples. \ne.g. JLC_DIRS = (\n    ('/path/to/src', '/path/to/'),\n    ('/path/to/other/src', '/path/to/other'),\n)")
+            return
+
+            
         #for each template directory look for a src dir
         if (isinstance(settings.TEMPLATE_DIRS, tuple)):
             for template_directory in settings.TEMPLATE_DIRS:
