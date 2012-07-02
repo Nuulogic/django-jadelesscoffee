@@ -13,7 +13,7 @@ class JadeLessCoffeeMiddleware(object):
 
     def process_request(self, request):
         #if the JLC_DIRS is set then just do them
-        if settings.JLC_DIRS is not None:
+        if hasattr(settings, 'JLC_DIRS'):
             if isinstance(settings.JLC_DIRS, tuple):
                 try:
                     for jlcsource, jlcdestination in settings.JLC_DIRS:
