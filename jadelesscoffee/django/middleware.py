@@ -2,6 +2,7 @@ from django.conf import settings
 from os import path
 import sys
 import os
+import subprocess
 
 class JadeLessCoffeeMiddleware(object):
     def __init__(JadeLessCoffeeMiddleware):
@@ -59,4 +60,24 @@ class JadeLessCoffeeMiddleware(object):
         #from subprocess import Popen, call, PIPE
         #shell=True is necessary on windows due to jlc being provided by environment variables in node
         #call(['jlc', '--incremental', '--out', output_directory, source_directory], shell=True)#, stdout=PIPE, stderr=PIPE)
-        os.system('jlc --quiet --incremental --out "%s" "%s"' % (output_directory, source_directory))
+        # os.system('jlc --quiet --incremental --out "%s" "%s"' % (output_directory, source_directory))
+
+        proc = subprocess.Popen(["jlc", "--quiet", "--incremental", "--python", "--out", output_directory, source_directory], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        (out, err) = proc.communicate()
+        
+        if len(err) > 0 and err is not None:
+            try:
+                error_object = eval(err)
+                filename = error_object['filename']
+                line_number = error_object['lineNumber']
+                offset = error_object['offset']
+                line = error_object['lineCode']
+                message = 'An error occurred in JadeLessCoffee code.\n%s' % error_object['message']
+            except:
+                filename = ''
+                line_number = 0
+                offset = ''
+                line = ''
+                message = 'An indeterminate error occurred in JadeLessCoffee code.\n%s' % err
+                
+            raise SyntaxError(message, (filename, line_number, offset, line))
