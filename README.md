@@ -11,13 +11,13 @@ django-jadelesscoffee is *not* meant for a production environment. **It is slow.
 Requirements
 ------------
 
-**JadeLessCoffee** Node.js module. (Note that this is currently in a closed alpha state until it can be a proven technique.)
+**JadeLessCoffee** Node.js module. (Note that this is currently in beta until it can be a proven technique.)
 
 
 Installation
 ------------
 
-`$ pip install git+git://github.com/Nuulogic/django-jadelesscoffee.git`
+`$ pip install django-jadelesscoffee`
 
 Then in your Django application, include this middleware:
 `MIDDLEWARE_CLASSES = (
@@ -28,6 +28,6 @@ Then in your Django application, include this middleware:
 Then add a 'src' folder in any of the TEMPLATE_DIRS and STATICFILES_DIRS entries you want to have .jade, .less, or .coffee files in.
 
 The following commands will run at each request and will only compile files that have changed.
-`jlc --quiet --incremental --output {{TEMPLATE_DIRS}} + '/src' {{TEMPLATE_DIRS}}`
-`jlc --quiet --incremental --output {{STATICFILES_DIRS}} + '/src' {{STATICFILES_DIRS}}`
+`jlc --quiet --incremental --python --out {{TEMPLATE_DIRS}} + '/src' {{TEMPLATE_DIRS}}`
+`jlc --quiet --incremental --python --out {{STATICFILES_DIRS}} + '/src' {{STATICFILES_DIRS}}`
 

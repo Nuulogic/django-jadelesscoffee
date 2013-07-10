@@ -62,7 +62,7 @@ class JadeLessCoffeeMiddleware(object):
         #call(['jlc', '--incremental', '--out', output_directory, source_directory], shell=True)#, stdout=PIPE, stderr=PIPE)
         # os.system('jlc --quiet --incremental --out "%s" "%s"' % (output_directory, source_directory))
 
-        proc = subprocess.Popen(["jlc", "--quiet", "--incremental", "--python", "--out", output_directory, source_directory], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        proc = subprocess.Popen("jlc --quiet --incremental --python --out \"%s\" \"%s\"" % (output_directory, source_directory), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         (out, err) = proc.communicate()
         
         if len(err) > 0 and err is not None:
